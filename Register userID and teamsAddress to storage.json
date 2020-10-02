@@ -1,0 +1,10 @@
+{
+ "name": "Register user to storage",
+ "id": "470cfd52-96a3-4a71-b2ce-b15d4c1f7674",
+ "scenario_trigger": "registeruser",
+ "description": "Register each user's ID and Teams address into Table Storage",
+ "active": true,
+ "updated": "2020-10-01T21:39:02.0820000Z",
+ "userDisplayName": "Nikita Pitliya",
+ "code": "{\"version\":3,\"steps\":[{\"id\":\"805874b62657-95d0f4a2825dc263-1879\",\"type\":\"statement\",\"designer\":{\"xLocation\":520,\"yLocation\":186,\"next\":\"16c010cfa547-863478ba898a4355-a858\"},\"text\":\"Initiating scenario - register user\",\"stringId\":\"stringId_718fd32571a53ec3\",\"label\":\"Welcome\"},{\"id\":\"16c010cfa547-863478ba898a4355-a858\",\"type\":\"action\",\"label\":\"Init Action\",\"designer\":{\"xLocation\":527,\"yLocation\":260,\"next\":\"999e23d1d1c4-33279790a0d4e78b-08b8\"},\"onInit\":\"scenario.userTeamsAddress = JSON.stringify(session.message.address);\\r\\nscenario.userId = session.message[\\\"user\\\"].aadObjectId;\\r\\nscenario.timenow = new Date();\"},{\"id\":\"999e23d1d1c4-33279790a0d4e78b-08b8\",\"type\":\"datasource\",\"designer\":{\"xLocation\":520,\"yLocation\":351},\"dataConnection\":\"\",\"urlBase\":\"https://<storageaccountname>.table.core.windows.net/<tablename>?<sas-authentication-key>\",\"urlPath\":\"\",\"urlParams\":\"\",\"method\":\"post\",\"headers\":\"{\\r\\n    \\\"Content-Type\\\": \\\"application/json\\\"\\r\\n}\",\"opJson\":true,\"opResolveWithFullResponse\":false,\"response\":\"insertedAddress\",\"contentType\":\"raw\",\"payload\":\"{ \\r\\n    \\\"PartitionKey\\\": scenario.userId, \\r\\n    \\\"RowKey\\\":\\\"teamsAddress\\\",   \\r\\n    \\\"Address\\\": scenario.userTeamsAddress,\\r\\n    \\\"Timestamp\\\": scenario.timenow\\r\\n}\",\"label\":\"Ingest to Table\"}],\"interrupting\":false,\"breaking\":false,\"returningMessage\":\"\"}"
+}
